@@ -7,5 +7,10 @@ The dataset used is mnist_784, available to download on [OpenML](https://www.ope
 Author: Yann LeCun, Corinna Cortes, Christopher J.C. Burges<br/>
 Source: [MNIST Website](http://yann.lecun.com/exdb/mnist/)<br/>
 
-Code written in Python3.
+Code written in Python3. <br/>
+Libraries used:
+-matplotlib
+-numpy
+-sklearn
+
 
