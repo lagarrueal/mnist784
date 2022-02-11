@@ -8,26 +8,26 @@ Created on Sat Feb 27 01:03:00 2021
 import matplotlib.pyplot as plt
 import numpy as np
 
-#ouverture du jeu de données MNIST directement depuis scykit
+#opening dataset MNIST directly from scykit
 # =============================================================================
-# Ce jeu de données est constitué de 70 000 images représentant 
-# l'écriture manuscrite des chiffres de 0 à 9
-# Chaque image fait 28x28 pixels et est composée d'un fond blanc et du
-# chiffre écrit en noir
+# This dataset is made of 70 000 images representing
+# handwritten numbers from 0 to 9
+# Each image is 28x28 pixels and is composed of a white background and 
+# the number written in black
 # =============================================================================
 from sklearn.datasets import fetch_openml
 
 mnist = fetch_openml('mnist_784' , version = 1) 
 
-#le dataset principal qui contient toutes les images
+#main dataset containing all images
 print(mnist.data.shape)
 
-#le vecteur d'annotaions associés au dataset (nombre entre 0 et 9)
+#the vector of annotations associated with the dataset (number between 0 and 9)
 print(mnist.target.shape)
 
 # =============================================================================
-# Pour l'algorithme des k-NN, 70000 est deja trop comme nombre de données
-# On va donc faire un échantillon aléatoire
+# For the k-NN algorithm, 70000 is to big as a dataset size
+# So We're taking a random sample
 # =============================================================================
 
 sample = np.random.randint(70000 , size = 5000)
@@ -35,14 +35,13 @@ data = mnist.data[sample]
 target = mnist.target[sample]
 
 # =============================================================================
-# L'échantillon étant créé, il faut maintenant séparer les train_data et les
-# test_data
+# Splitting the sample into train set and test set
 # =============================================================================
 from sklearn.model_selection import train_test_split
 xtrain , xtest , ytrain , ytest = train_test_split(data , target , train_size = 0.8)
 
 # =============================================================================
-# Une fois les données séparées, on peut commencer à utiliser le modèle
+# When the sample is split, we can begin to use the model
 # =============================================================================
 from sklearn import neighbors
 # =============================================================================
@@ -50,14 +49,14 @@ model = neighbors.KNeighborsClassifier(n_neighbors = 3)
 model.fit(xtrain , ytrain)
 model.predict([xtest[3]])
 
-#pourcentage d'erreur
-print("pourcentage d'erreur sur notre échantillon pour k = 3 : " , 1 - model.score(xtest, ytest))
+#error percentage
+print("error percentage on our sample for k = 3 : " , 1 - model.score(xtest, ytest))
 # =============================================================================
 
 
-#méthode pour avoir la courbe de pourcentage d'erreur en fonction du nombre de plus proche voisins
-errors = []  #création d'une list vide
-for k in range (2,15): #création d'une boucle allant de 2 à 15
+#method to get error percentage curve by the number of nearest neighbours
+errors = []  #creating an empty list
+for k in range (2,15): #loop for 2 to 15
     knn = neighbors.KNeighborsClassifier(k)
     errors.append(100*(1- knn.fit(xtrain, ytrain).score(xtest, ytest)))
 
@@ -65,21 +64,21 @@ plt.plot(range(2 , 15) ,  errors , 'o-')
 plt.show()
 
 
-#à partir du graphique précédant on récupère le classifieur le plus performant
-n = int(input("Entrez le classifieur le plus performant : "))
+# getting the best classifier from the graph
+n = int(input("Enter the best classifier : "))
 knn = neighbors.KNeighborsClassifier( n )
 knn.fit(xtrain, ytrain)
 
-#on récupère les prédictions sur les données test
+#getting predictions from the test set
 predicted = knn.predict(xtest)
 
-#on redimensionne les données sous forme d'images
+#reshaping the date into images
 images = xtest.reshape((-1 , 28 , 28))
 
-#on séléctione 12 images au hasard
+#getting 12 images randomly
 select = np.random.randint(images.shape[0] , size = 16)
 
-#on affiche les images avec la prédiction associée
+#displaying images with associated prediction
 fig , ax = plt.subplots(3,4)
 
 for index, value in enumerate(select):
@@ -90,15 +89,15 @@ for index, value in enumerate(select):
     
 plt.show()
 
-#on peut également récupérer quelques prédictions éronées pour mieux comprendre l'algorithme
+#getting some false predictions
 misclass = (ytest != predicted)
 misclass_images = images[misclass,:,:]
 misclass_predicted = predicted[misclass]
 
-#on séléctionne un échantillon de ces images
+#getting a sample of those images
 select = np.random.randint(misclass_images.shape[0], size=16)
 
-#on affiche les images et les prédictions
+#displayng images and predictions
 for index, value in enumerate(select):
     plt.subplot(4,4,index+1)
     plt.axis('off')
