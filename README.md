@@ -3,9 +3,9 @@
 
 Program made by following [this tutorial](https://openclassrooms.com/fr/courses/4011851-initiez-vous-au-machine-learning/4022441-entrainez-votre-premier-k-nn)
 
-The dataset used is mnist_784, available to download on [OpenML](https://www.openml.org/d/554) \n
-Author: Yann LeCun, Corinna Cortes, Christopher J.C. Burges \n
-Source: [MNIST Website](http://yann.lecun.com/exdb/mnist/) \n
+The dataset used is mnist_784, available to download on [OpenML](https://www.openml.org/d/554)<br/>
+Author: Yann LeCun, Corinna Cortes, Christopher J.C. Burges<br/>
+Source: [MNIST Website](http://yann.lecun.com/exdb/mnist/)<br/>
 
 Code written in Python3.
 
