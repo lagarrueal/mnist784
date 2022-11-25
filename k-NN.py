@@ -10,7 +10,7 @@ import numpy as np
 
 #opening dataset MNIST directly from scykit
 # =============================================================================
-# This dataset is made of 70 000 images representing
+# This dataset is composed of 70 000 images representing
 # handwritten numbers from 0 to 9
 # Each image is 28x28 pixels and is composed of a white background and 
 # the number written in black
